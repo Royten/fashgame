@@ -11,7 +11,6 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link  } from 'react-router';
 import styled, { keyframes } from 'styled-components';
 
 import Button from './Button';
@@ -33,10 +32,10 @@ const ButtonGroup = styled.div`
 
 const ticker = keyframes`
   from {
-    transform: translate(300%);
+    transform: translate(100%);
   }
   to {
-    transform: translate(-200%);
+    transform: translate(-100%);
   }
 `
 
@@ -53,10 +52,11 @@ const TickerTape = styled.div`
 `
 
 const Ticker = styled.div`
+  width: 100%;
   display: inline-block;
   position: relative;
   font-size: 12pt;
-  animation: ${ticker} 7s linear infinite;
+  animation: ${ticker} 10s linear infinite;
 `
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -64,16 +64,20 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     this.props.setLoading(false);
   }
 
+  clickMenu(route) {
+    this.props.router.push(route);
+  }
+
   render() {
     return (
       <Container>
         <ButtonGroup>
-          <Link to='/'><Button>Rankings</Button></Link>
-          <Link to='/closet'><Button>Closet</Button></Link>
-          <Link to='/'><Button>Tutorial</Button></Link>
-          <Link to='/'><Button>Challenges</Button></Link>
-          <Link to='/'><Button>Button5</Button></Link>
-          <Link to='/'><Button>Button6</Button></Link>
+          <Button disabled onClick={this.clickMenu.bind(this, '/')}>Rankings</Button>
+          <Button onClick={this.clickMenu.bind(this, '/closet')}>Closet</Button>
+          <Button disabled onClick={this.clickMenu.bind(this, '/')}>Tutorial</Button>
+          <Button disabled onClick={this.clickMenu.bind(this, '/')}>Challenge</Button>
+          <Button disabled onClick={this.clickMenu.bind(this, '/')}>Button5</Button>
+          <Button disabled onClick={this.clickMenu.bind(this, '/')}>Button6</Button>
         </ButtonGroup>
         <TickerTape><Ticker>Some Fashion News!!!</Ticker></TickerTape>
       </Container>
