@@ -61,7 +61,7 @@ const Ticker = styled.div`
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    setTimeout(this.props.setLoading.bind(null, false), 2000);
+    this.props.setLoading(false);
   }
 
   render() {
