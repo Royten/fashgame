@@ -10,3 +10,5 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+export const SET_LOADING = 'fashion/App/SET_LOADING';
+export const TOGGLE_MENU = 'fashion/App/TOGGLE_MENU';

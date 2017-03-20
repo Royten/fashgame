@@ -69,6 +69,7 @@ const render = (messages) => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <Router
+          onUpdate={rootUpdate}
           history={history}
           routes={rootRoute}
           render={
@@ -82,6 +83,10 @@ const render = (messages) => {
     document.getElementById('app')
   );
 };
+
+function rootUpdate() {
+  console.log(this);
+}
 
 // Hot reloadable translation json files
 if (module.hot) {

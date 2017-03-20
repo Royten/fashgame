@@ -10,15 +10,82 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import { connect } from 'react-redux';
+import { Link  } from 'react-router';
+import styled, { keyframes } from 'styled-components';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+import Button from './Button';
+
+import {
+  setLoading,
+} from '../App/actions';
+
+const Container = styled.div`
+  height: 100%;
+  position: relative;
+`
+
+const ButtonGroup = styled.div`
+  bottom: 10%;
+  display: inline-block;
+  position: absolute;
+`
+
+const ticker = keyframes`
+  from {
+    transform: translate(300%);
+  }
+  to {
+    transform: translate(-200%);
+  }
+`
+
+const TickerTape = styled.div`
+  height: 4%;
+  display: inline-block;
+  position: absolute;
+  bottom: 4%;
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  background-color: white;
+  overflow: hidden;
+`
+
+const Ticker = styled.div`
+  display: inline-block;
+  position: relative;
+  font-size: 12pt;
+  animation: ${ticker} 7s linear infinite;
+`
+
+export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    setTimeout(this.props.setLoading.bind(null, false), 2000);
+  }
+
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <Container>
+        <ButtonGroup>
+          <Link to='/'><Button>Rankings</Button></Link>
+          <Link to='/closet'><Button>Closet</Button></Link>
+          <Link to='/'><Button>Tutorial</Button></Link>
+          <Link to='/'><Button>Challenges</Button></Link>
+          <Link to='/'><Button>Button5</Button></Link>
+          <Link to='/'><Button>Button6</Button></Link>
+        </ButtonGroup>
+        <TickerTape><Ticker>Some Fashion News!!!</Ticker></TickerTape>
+      </Container>
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setLoading: (load) => dispatch(setLoading(load)),
+    dispatch,
+  };
+}
+
+export default connect(null, mapDispatchToProps)(HomePage);
