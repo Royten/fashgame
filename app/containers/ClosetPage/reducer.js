@@ -32,8 +32,10 @@ function closetPageReducer(state = initialState, action) {
 
       if (wearInner.includes(action.item)) {
         wearInner = wearInner.remove(wearInner.indexOf(action.item));
-      } else {
+      } else if (action.itemtype === 0) {
         wearInner = wearInner.push(action.item);
+      } else {
+        wearInner = fromJS([action.item]);
       }
       wear = wear.set(action.itemtype, wearInner);
       return state.set('wearables', wear);
