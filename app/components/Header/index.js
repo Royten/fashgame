@@ -13,6 +13,7 @@ import { FaBars, FaGroup } from 'react-icons/lib/fa';
 import { toggleMenu } from '../../containers/App/actions';
 
 const HeaderBar = styled.div`
+  z-index: 10;
   height: 56px;
   width: 100vw;
   position: fixed;
@@ -30,7 +31,7 @@ const HeaderIcon = styled.div`
   svg {
     cursor: pointer;
   }
-`
+`;
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   clickMenu() {
@@ -40,7 +41,7 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
   render() {
     return (
       <HeaderBar>
-        <HeaderIcon><FaBars onClick={ this.clickMenu.bind(this) }/></HeaderIcon>
+        <HeaderIcon><FaBars onClick={() => this.clickMenu()} /></HeaderIcon>
         <HeaderIcon><FaGroup /></HeaderIcon>
       </HeaderBar>
     );

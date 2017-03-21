@@ -85,7 +85,7 @@ const render = (messages) => {
 };
 
 function rootUpdate() {
-  //console.log(this);
+  // console.log(this);
 }
 
 // Hot reloadable translation json files
