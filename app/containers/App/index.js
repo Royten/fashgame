@@ -129,7 +129,7 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
 
   clickMenu() {
     this.props.toggleMenu();
-    this.props.router.push('/');
+    this.props.router.replace('/');
   }
 
   render() {
