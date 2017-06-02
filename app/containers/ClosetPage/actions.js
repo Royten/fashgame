@@ -23,10 +23,9 @@ export function changeTab(tab) {
   };
 }
 
-export function selectItem(item, itemtype) {
+export function selectItem(item) {
   return {
     type: SELECT_ITEM,
     item,
-    itemtype,
   };
 }

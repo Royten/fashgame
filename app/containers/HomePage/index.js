@@ -21,9 +21,6 @@ import {
 
 import BackGround from '../../assets/bg.jpg';
 import Home1 from '../../assets/home_model_1.png';
-// import Home2 from '../../assets/home_model2.png';
-// import Home3 from '../../assets/home_model3.png';
-// import Home4 from '../../assets/home_model4.png';
 
 const Container = styled.div`
   height: 100%;

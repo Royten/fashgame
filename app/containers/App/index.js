@@ -32,7 +32,7 @@ import {
 
 } from 'react-icons/lib/fa';
 
-import Header from 'components/Header';
+// import Header from 'components/Header';
 
 import {
   setLoading,
@@ -49,7 +49,7 @@ import ProfilePic from '../../assets/ProfilePic.png';
 const Content = styled.div`
   height: 100%;
   width: 100%;
-  padding-top: 56px;
+  //padding-top: 56px;
   background-color: #BBB;
 `;
 
@@ -135,7 +135,6 @@ export class App extends React.PureComponent { // eslint-disable-line react/pref
   render() {
     return (
       <div style={{ height: '100%' }}>
-        <Header />
         <Content>
           {React.Children.toArray(this.props.children)}
         </Content>

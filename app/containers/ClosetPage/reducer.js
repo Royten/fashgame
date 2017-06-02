@@ -17,6 +17,13 @@ const initialState = fromJS({
     [],
     [],
     [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
   ],
 });
 
@@ -28,16 +35,22 @@ function closetPageReducer(state = initialState, action) {
       return state.set('activeTab', action.tab);
     case SELECT_ITEM:
       wear = state.get('wearables');
-      wearInner = wear.get(action.itemtype);
+      wearInner = wear.get(action.item.type);
 
-      if (wearInner.includes(action.item)) {
-        wearInner = wearInner.remove(wearInner.indexOf(action.item));
-      } else if (action.itemtype === 0) {
-        wearInner = wearInner.push(action.item);
+      if (wearInner.includes(action.item.img)) {
+        wearInner = wearInner.remove(wearInner.indexOf(action.item.img));
       } else {
-        wearInner = fromJS([action.item]);
+        wearInner = fromJS([action.item.img]);
       }
-      wear = wear.set(action.itemtype, wearInner);
+
+      if (action.item.type === 2 || action.item.type === 3) {
+        wear = wear.set(4, fromJS([]));
+      } else if (action.item.type === 4) {
+        wear = wear.set(2, fromJS([]));
+        wear = wear.set(3, fromJS([]));
+      }
+
+      wear = wear.set(action.item.type, wearInner);
       return state.set('wearables', wear);
     case DEFAULT_ACTION:
       return state;

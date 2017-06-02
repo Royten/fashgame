@@ -23,32 +23,7 @@ import {
 import ModelPreview from '../../components/ModelPreview';
 import Closet from '../../components/Closet';
 
-import Dress from '../../assets/dress.png';
-import Bag from '../../assets/bag.png';
-import Bracelet from '../../assets/bracelet.png';
-import Hair1 from '../../assets/hair1.png';
-import Hair2 from '../../assets/hair2.png';
-import Make1 from '../../assets/makeup1.png';
-import Make2 from '../../assets/makeup2.png';
-import Make3 from '../../assets/makeup3.png';
-import Shoes from '../../assets/shoes2.png';
-import Pants from '../../assets/pants.png';
-
-// accessories
-import PBag from '../../assets/preview_bag.png';
-import PBrac from '../../assets/preview_bracelet.png';
-// clothes
-import PDress from '../../assets/preview_dress.png';
-import PPants from '../../assets/preview_pants.png';
-import PShoes from '../../assets/preview_shoes2.png';
-// hair
-import PHair1 from '../../assets/preview_hair1.png';
-import PHair2 from '../../assets/preview_hair2.png';
-// makeup
-import PMake1 from '../../assets/preview_makeup1.png';
-import PMake2 from '../../assets/preview_makeup2.png';
-import PMake3 from '../../assets/preview_makeup3.png';
-
+import Items from './fakedata';
 
 const Container = styled.div`
   height: 100%;
@@ -67,44 +42,20 @@ export class ClosetPage extends React.PureComponent { // eslint-disable-line rea
   }
 
   render() {
-    let items;
-
-    switch (this.props.ClosetPage.activeTab) {
-      case 0:
-        // clothes
-        items = [
-          { preview: PDress, img: Dress, type: 0 },
-          { preview: PBrac, img: Bracelet, type: 0 },
-          { preview: PBag, img: Bag, type: 0 },
-          { preview: PShoes, img: Shoes, type: 0 },
-          { preview: PPants, img: Pants, type: 0 },
-        ];
-        break;
-      case 1:
-        // hair
-        items = [
-          { preview: PHair1, img: Hair1, type: 1 },
-          { preview: PHair2, img: Hair2, type: 1 },
-        ];
-        break;
-      case 2:
-        // makeup
-        items = [
-          { preview: PMake1, img: Make1, type: 2 },
-          { preview: PMake2, img: Make2, type: 2 },
-          { preview: PMake3, img: Make3, type: 2 },
-        ];
-        break;
-      default:
-        items = [];
-    }
+    const items = Items[this.props.ClosetPage.activeTab];
 
     return (
       <Container>
         <ModelPreview
-          makeup={this.props.ClosetPage.wearables[2]}
-          clothes={this.props.ClosetPage.wearables[0]}
-          hair={this.props.ClosetPage.wearables[1]}
+          makeup={this.props.ClosetPage.wearables[1]}
+          tops={this.props.ClosetPage.wearables[2]}
+          bottoms={this.props.ClosetPage.wearables[3]}
+          dresses={this.props.ClosetPage.wearables[4]}
+          coats={this.props.ClosetPage.wearables[5]}
+          shoes={this.props.ClosetPage.wearables[6]}
+          jewellery={this.props.ClosetPage.wearables[7]}
+          accessories={this.props.ClosetPage.wearables[8]}
+          hair={this.props.ClosetPage.wearables[9]}
         />
         <Closet
           activeTab={this.props.ClosetPage.activeTab}
@@ -132,7 +83,7 @@ function mapDispatchToProps(dispatch) {
   return {
     setLoading: (load) => dispatch(setLoading(load)),
     changeTab: (tab) => dispatch(changeTab(tab)),
-    selectItem: (item, type) => dispatch(selectItem(item, type)),
+    selectItem: (item) => dispatch(selectItem(item)),
   };
 }
 
