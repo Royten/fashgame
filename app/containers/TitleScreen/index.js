@@ -60,7 +60,7 @@ export class TitleScreen extends React.PureComponent { // eslint-disable-line re
   }
 
   start() {
-    this.props.router.push('/closet');
+    this.props.router.push('/challenge');
   }
 
   render() {

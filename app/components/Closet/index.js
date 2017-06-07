@@ -72,7 +72,7 @@ const MenuImg = styled.img`
 `;
 
 const MenuItem = styled.div`
-  height: 16vw;
+  height: 10vh;
   margin: 5px 0 5px 10px;
   &:active {
     opacity: 0.5;
@@ -118,7 +118,7 @@ const ItemName = styled.div``;
 const ItemPrice = styled.div``;
 
 const Back = styled.img`
-  width: 50%;
+  max-width: 100px;
   float: right;
   margin: 10px;
 `;
