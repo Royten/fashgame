@@ -17,6 +17,7 @@ import IconJewl from '../../assets/stylescreen/07.png';
 import IconAccs from '../../assets/stylescreen/08.png';
 
 import BackButton from '../../assets/stylescreen/back.png';
+import Gem from '../../assets/gem.png';
 
 const menu = [
   {
@@ -131,6 +132,12 @@ const BottomButton = styled.button`
   height: 8%;
   white-space: pre-line;
 `;
+
+const GemIcon = styled.img`
+  height: 20px;
+  margin: 0 5px;
+`;
+
 class Closet extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
@@ -168,7 +175,8 @@ class Closet extends React.PureComponent { // eslint-disable-line react/prefer-s
       let price;
 
       if (item.price > 0) {
-        price = <ItemPrice>{this.props.ownedItems.some((e) => e.name === item.name) ? 'OWNED' : item.price}</ItemPrice>;
+        const itemprice = (<div><GemIcon src={Gem} /> <span>{item.price}</span></div>);
+        price = <ItemPrice>{this.props.ownedItems.some((e) => e.name === item.name) ? 'OWNED' : itemprice }</ItemPrice>;
       }
 
       return (

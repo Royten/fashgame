@@ -25,6 +25,8 @@ import ModelPreview from '../../components/ModelPreview';
 import Closet from '../../components/Closet';
 import BuyConfirmModal from '../../components/BuyConfirmModal';
 
+import Gem from '../../assets/gem.png';
+
 const Container = styled.div`
   height: 100%;
   position: relative;
@@ -38,6 +40,11 @@ const Balance = styled.div`
   left: 0;
   padding: 10px;
   z-index: 99999;
+`;
+
+const GemIcon = styled.img`
+  height: 20px;
+  margin: 0 5px;
 `;
 
 export class ClosetPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -84,7 +91,8 @@ export class ClosetPage extends React.PureComponent { // eslint-disable-line rea
     return (
       <Container>
         <Balance>
-          { balance }
+          <GemIcon src={Gem} />
+          <span>{ balance }</span>
         </Balance>
         <ModelPreview
           outfit={this.props.ClosetPage.currentItems}

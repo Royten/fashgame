@@ -7,6 +7,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Gem from '../../assets/gem.png';
+
 const Backdrop = styled.div`
   width: 100vw;
   height: 100vh;
@@ -81,6 +83,10 @@ const Image = styled.img`
   vertical-align: top;
 `;
 
+const GemIcon = styled.img`
+  height: 20px;
+  margin: 0 5px;
+`;
 
 class BuyConfirmModal extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -97,6 +103,7 @@ class BuyConfirmModal extends React.PureComponent { // eslint-disable-line react
                 {this.props.item.name}
               </Name>
               <Price>
+                <GemIcon src={Gem} />
                 {this.props.item.price}
               </Price>
             </Details>
