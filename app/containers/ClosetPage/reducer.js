@@ -9,49 +9,52 @@ import {
   DEFAULT_ACTION,
   CHANGE_TAB,
   SELECT_ITEM,
+  BUY_ITEM,
 } from './constants';
 
+import items from './fakedata';
+
 const initialState = fromJS({
+  balance: 40000,
   activeTab: 0,
-  wearables: [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-  ],
+  items,
+  currentItems: [],
+  boughtItems: [],
 });
 
 function closetPageReducer(state = initialState, action) {
-  let wear;
-  let wearInner;
+  let boughtItems;
+  let currentItems;
+  let balance;
   switch (action.type) {
     case CHANGE_TAB:
       return state.set('activeTab', action.tab);
     case SELECT_ITEM:
-      wear = state.get('wearables');
-      wearInner = wear.get(action.item.type);
+      currentItems = state.get('currentItems');
 
-      if (wearInner.includes(action.item.img)) {
-        wearInner = wearInner.remove(wearInner.indexOf(action.item.img));
+
+      if (currentItems.some((e) => e.name === action.item.name)) {
+        currentItems = currentItems.filter((e) => e.type !== action.item.type);
       } else {
-        wearInner = fromJS([action.item.img]);
+        currentItems = currentItems.filter((e) => e.type !== action.item.type);
+        currentItems = currentItems.push(action.item);
       }
 
       if (action.item.type === 2 || action.item.type === 3) {
-        wear = wear.set(4, fromJS([]));
+        currentItems = currentItems.filter((e) => e.type !== 4);
       } else if (action.item.type === 4) {
-        wear = wear.set(2, fromJS([]));
-        wear = wear.set(3, fromJS([]));
+        currentItems = currentItems.filter((e) => e.type !== 2 && e.type !== 3);
       }
 
-      wear = wear.set(action.item.type, wearInner);
-      return state.set('wearables', wear);
+      return state.set('currentItems', currentItems);
+    case BUY_ITEM:
+      boughtItems = state.get('boughtItems');
+      boughtItems = boughtItems.push(action.item);
+
+      balance = state.get('balance');
+      balance -= action.item.price;
+
+      return state.merge({ boughtItems, balance });
     case DEFAULT_ACTION:
       return state;
     default:

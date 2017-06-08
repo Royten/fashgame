@@ -8,6 +8,7 @@ import {
   DEFAULT_ACTION,
   CHANGE_TAB,
   SELECT_ITEM,
+  BUY_ITEM,
 } from './constants';
 
 export function defaultAction() {
@@ -26,6 +27,13 @@ export function changeTab(tab) {
 export function selectItem(item) {
   return {
     type: SELECT_ITEM,
+    item,
+  };
+}
+
+export function buyItem(item) {
+  return {
+    type: BUY_ITEM,
     item,
   };
 }

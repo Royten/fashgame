@@ -16,10 +16,6 @@ import {
 
 import ChallengeImage from '../../assets/challengescreen/challenge.jpg';
 
-const ChallengeGreeting = styled.div`
-  padding: 10px 20px;
-`;
-
 const ChallengeHeader = styled.img`
   width: 100vw;
 `;
@@ -48,13 +44,14 @@ const ChallengeButton = styled.button`
   color: white;
 `;
 
-const ChallengeTooltip = styled.div`
+const ChallengeTooltip = styled.text`
   width: 100vw;
   position: fixed;
   bottom: 10px;
   color: white;
   background-color: royalblue;
   padding: 20px;
+  white-space: pre-line;
 `;
 
 export class ChallengeScreen extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -83,18 +80,13 @@ export class ChallengeScreen extends React.PureComponent { // eslint-disable-lin
 
   render() {
     const steps = [
-      'Step 1',
-      'Step 2',
-      'Step 3',
+      'イベントチャレンジへようこそ！\n あなたは憧れのセレブスタイリストだよ！\n お題とドレスコードを確認し、素敵なコーデを作ってみて',
+      '各アイテムをTAPすると試着ができるよ！\n 欲しいアイテムガあれば、２TAPして、ダイヤで買ってみてね',
+      '素敵なコーデを作って、チャレンジにエントリーしてみてね！\n ドレスコードは必ず守ってね！',
     ];
 
     return (
       <div>
-        <ChallengeGreeting>
-          イベントチャレンジようこそ！
-          <br />
-          あなたは憧れのセレブスタイリストだよ！
-        </ChallengeGreeting>
         <ChallengeHeader src={ChallengeImage} />
         <ChallengeDescription>
           <ChallengeTitle>

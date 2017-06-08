@@ -123,6 +123,14 @@ const Back = styled.img`
   margin: 10px;
 `;
 
+const BottomButton = styled.button`
+  width: 40%;
+  border: 2px solid black;
+  margin: 5px;
+  cursor: pointer;
+  height: 8%;
+  white-space: pre-line;
+`;
 class Closet extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
@@ -142,20 +150,38 @@ class Closet extends React.PureComponent { // eslint-disable-line react/prefer-s
           <Menu>
             { menujsx }
           </Menu>
+          <BottomButton>
+            ドレス
+            コード
+          </BottomButton>
+          <BottomButton
+            onClick={() => this.props.clickTab(99)}
+          >
+            使用中
+            アイテム
+          </BottomButton>
         </Container>
       );
     }
 
-    const itemsjsx = this.props.items.map((item, index) =>
-      <ItemListItem
-        key={index}
-        onClick={() => this.props.selectItem(item)}
-      >
-        <ItemImg src={item.preview} />
-        <ItemName>{item.name}</ItemName>
-        <ItemPrice>{item.price}</ItemPrice>
-      </ItemListItem>
-    );
+    const itemsjsx = this.props.items.map((item, index) => {
+      let price;
+
+      if (item.price > 0) {
+        price = <ItemPrice>{this.props.ownedItems.some((e) => e.name === item.name) ? 'OWNED' : item.price}</ItemPrice>;
+      }
+
+      return (
+        <ItemListItem
+          key={index}
+          onClick={() => this.props.selectItem(item)}
+        >
+          <ItemImg src={item.preview} />
+          <ItemName>{item.name}</ItemName>
+          {price}
+        </ItemListItem>
+      );
+    });
 
     return (
       <Container>
@@ -177,6 +203,7 @@ Closet.propTypes = {
   clickTab: React.PropTypes.func,
   selectItem: React.PropTypes.func,
   items: React.PropTypes.array,
+  ownedItems: React.PropTypes.array,
   activeTab: React.PropTypes.number,
 };
 

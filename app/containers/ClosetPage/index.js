@@ -18,12 +18,12 @@ import {
 import {
   changeTab,
   selectItem,
+  buyItem,
 } from './actions';
 
 import ModelPreview from '../../components/ModelPreview';
 import Closet from '../../components/Closet';
-
-import Items from './fakedata';
+import BuyConfirmModal from '../../components/BuyConfirmModal';
 
 const Container = styled.div`
   height: 100%;
@@ -31,7 +31,23 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
+const Balance = styled.div`
+  width: 50vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  z-index: 99999;
+`;
+
 export class ClosetPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      buypopup: false,
+      item: null,
+    };
+  }
 
   componentWillMount() {
     this.props.setLoading(true);
@@ -41,28 +57,54 @@ export class ClosetPage extends React.PureComponent { // eslint-disable-line rea
     this.props.setLoading(false);
   }
 
+  selectItem(item) {
+    if (item.price > 0 && this.props.ClosetPage.currentItems.some((e) => e.name === item.name) && this.props.ClosetPage.boughtItems.every((e) => e.name !== item.name)) {
+      // BUY POPUP
+      if (this.props.ClosetPage.balance >= item.price) {
+        this.setState({ buypopup: true, item });
+      } else {
+        this.props.selectItem(item);
+      }
+    } else {
+      this.props.selectItem(item);
+    }
+  }
+
+  buyItem(confirm) {
+    if (confirm) {
+      this.props.buyItem(this.state.item);
+    }
+    this.setState({ buypopup: false, item: null });
+  }
+
   render() {
-    const items = Items[this.props.ClosetPage.activeTab];
+    const balance = this.props.ClosetPage.balance;
+    const items = this.props.ClosetPage.activeTab === 99 ? this.props.ClosetPage.currentItems : this.props.ClosetPage.items[this.props.ClosetPage.activeTab];
 
     return (
       <Container>
+        <Balance>
+          { balance }
+        </Balance>
         <ModelPreview
-          makeup={this.props.ClosetPage.wearables[1]}
-          tops={this.props.ClosetPage.wearables[2]}
-          bottoms={this.props.ClosetPage.wearables[3]}
-          dresses={this.props.ClosetPage.wearables[4]}
-          coats={this.props.ClosetPage.wearables[5]}
-          shoes={this.props.ClosetPage.wearables[6]}
-          jewellery={this.props.ClosetPage.wearables[7]}
-          accessories={this.props.ClosetPage.wearables[8]}
-          hair={this.props.ClosetPage.wearables[9]}
+          outfit={this.props.ClosetPage.currentItems}
         />
         <Closet
           activeTab={this.props.ClosetPage.activeTab}
           clickTab={this.props.changeTab}
           items={items}
-          selectItem={this.props.selectItem}
+          ownedItems={this.props.ClosetPage.boughtItems}
+          selectItem={(item) => this.selectItem(item)}
         />
+        {
+          this.state.buypopup
+            ? <BuyConfirmModal
+              item={this.state.item}
+              buyItem={(confirm) => this.buyItem(confirm)}
+              dialog="このアイテムを購入しますか？"
+            />
+            : ''
+        }
       </Container>
     );
   }
@@ -73,6 +115,7 @@ ClosetPage.propTypes = {
   setLoading: React.PropTypes.func,
   changeTab: React.PropTypes.func,
   selectItem: React.PropTypes.func,
+  buyItem: React.PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -84,6 +127,7 @@ function mapDispatchToProps(dispatch) {
     setLoading: (load) => dispatch(setLoading(load)),
     changeTab: (tab) => dispatch(changeTab(tab)),
     selectItem: (item) => dispatch(selectItem(item)),
+    buyItem: (item) => dispatch(buyItem(item)),
   };
 }
 
