@@ -1,14 +1,13 @@
-import { createSelector } from 'reselect';
+import { createSelector } from 'reselect'
 
 /**
  * Direct selector to the challengeScreen state domain
  */
-const selectChallengeScreenDomain = () => (state) => state.get('challengeScreen');
+const selectChallengeScreenDomain = () => (state) => state.get('challengeScreen')
 
 /**
  * Other specific selectors
  */
-
 
 /**
  * Default selector used by ChallengeScreen
@@ -17,9 +16,9 @@ const selectChallengeScreenDomain = () => (state) => state.get('challengeScreen'
 const makeSelectChallengeScreen = () => createSelector(
   selectChallengeScreenDomain(),
   (substate) => substate.toJS()
-);
+)
 
-export default makeSelectChallengeScreen;
+export default makeSelectChallengeScreen
 export {
-  selectChallengeScreenDomain,
-};
+  selectChallengeScreenDomain
+}

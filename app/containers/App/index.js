@@ -50,7 +50,7 @@ const Content = styled.div`
   height: 100%;
   width: 100%;
   //padding-top: 56px;
-  background-color: #BBB;
+  background-color: #f1b5b6;
 `;
 
 const Menu = styled.div`

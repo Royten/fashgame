@@ -1,17 +1,17 @@
 import {
   SET_LOADING,
-  TOGGLE_MENU,
-} from './constants';
+  TOGGLE_MENU
+} from './constants'
 
-export function setLoading(loading) {
+export function setLoading (loading) {
   return {
     type: SET_LOADING,
-    loading,
-  };
+    loading
+  }
 }
 
-export function toggleMenu() {
+export function toggleMenu () {
   return {
-    type: TOGGLE_MENU,
-  };
+    type: TOGGLE_MENU
+  }
 }

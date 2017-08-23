@@ -70,6 +70,32 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/voting',
+      name: 'votingScreen',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/VotingScreen/reducer'),
+          import('containers/VotingScreen'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, component]) => {
+          injectReducer('votingScreen', reducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/result',
+      name: 'resultScreen',
+      getComponent(location, cb) {
+        import('containers/ResultScreen')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

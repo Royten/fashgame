@@ -9,6 +9,6 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const DEFAULT_LOCALE = 'en';
-export const SET_LOADING = 'fashion/App/SET_LOADING';
-export const TOGGLE_MENU = 'fashion/App/TOGGLE_MENU';
+export const DEFAULT_LOCALE = 'en'
+export const SET_LOADING = 'fashion/App/SET_LOADING'
+export const TOGGLE_MENU = 'fashion/App/TOGGLE_MENU'

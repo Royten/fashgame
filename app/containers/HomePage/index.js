@@ -90,7 +90,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
   }
 
   clickMenu(route) {
-    this.props.router.push(route);
+    this.props.router.replace(route);
   }
 
   render() {
